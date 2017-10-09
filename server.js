@@ -2,7 +2,7 @@ var express = require('express');
 var OAuth2 = require('./oauth2').OAuth2;
 var config = require('./config');
 
-var queryContext="{\"entities\": [{  \"type\": \"Room\",  \"isPattern\": \"false\",  \"id\": \"Room1\"}    ]} ";
+
 // Express configuration
 var app = express();
 app.use(express.logger());
@@ -40,19 +40,14 @@ app.get('/', function(req, res){
 
     // If auth_token is not stored in a session cookie it sends a button to redirect to IDM authentication portal 
     if(!req.session.access_token) {
-        res.send("SSR Oauth2 Demo.<br><br><button onclick='window.location.href=\"/auth\"'>Log in with FI-WARE Account</button>");
+        res.send("Oauth2 Demo.<br><br><button onclick='window.location.href=\"/auth\"'>Log in with SSRP Account</button>");
 
     // If auth_token is stored in a session cookie it sends a button to get user info
     } else {
         res.send("Successfully authenticated. <br><br> Your oauth access_token: " +req.session.access_token + "<br><br><button onclick='window.location.href=\"/user_info\"'>Get my user info</button>");
     }
 });
-// Handles notification requests 
-app.post('/notify', function(req, res){
 
-    console.log(req.body);
-    res.send("OK");
-});
 // Handles requests from IDM with the access code
 app.get('/login', function(req, res){
    
@@ -76,15 +71,13 @@ app.get('/auth', function(req, res){
 // Ask IDM for user info
 app.get('/user_info', function(req, res){
     var url = config.idmURL + '/user';
-	
+
     // Using the access token asks the IDM for the user info
     oa.get(url, req.session.access_token, function (e, response) {
 
         var user = JSON.parse(response);
-        res.send(user);
         res.send("Welcome " + user.displayName + "<br> Your email address is " + user.email + "<br><br><button onclick='window.location.href=\"/logout\"'>Log out</button>");
     });
- 
 });
 
 // Handles logout requests to remove access_token from the session cookie

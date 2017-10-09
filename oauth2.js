@@ -163,6 +163,3 @@ exports.OAuth2.prototype.getOAuthAccessToken= function(code, callback) {
 exports.OAuth2.prototype.get= function(url, access_token, callback) {
   this._request("GET", url, {}, "", access_token, callback);
 }
-exports.OAuth2.prototype.post= function(url, access_token, callback) {
-  this._request("POST", url, {}, "", access_token, callback);
-}
