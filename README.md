@@ -1,7 +1,7 @@
 oauth2-example-client
 ===================
 
-Oauth2 authentication example for FI-WARE GE applications
+Oauth2 authentication example for SSRP applications
 
 - Software requirements:
 
