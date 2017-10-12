@@ -44,7 +44,8 @@ app.get('/', function(req, res){
 
     // If auth_token is stored in a session cookie it sends a button to get user info
     } else {
-        res.send("Successfully authenticated. <br><br> Your oauth access_token: " +req.session.access_token + "<br><br><button onclick='window.location.href=\"/user_info\"'>Get my user info</button>");
+       // res.send("Successfully authenticated. <br><br> Your oauth access_token: " +req.session.access_token + "<br><br><button onclick='window.location.href=\"/user_info\"'>Get my user info</button>");
+          res.send("Successfully authenticated. <br><br> Your oauth access_token: " +req.session.access_token+ "<br><br><button onclick='window.location.href=\"/logout\"'>Log out</button>");
     }
 });
 
